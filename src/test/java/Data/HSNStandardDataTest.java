@@ -3,8 +3,6 @@ package Data;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by darwin on 27.02.17.
  */

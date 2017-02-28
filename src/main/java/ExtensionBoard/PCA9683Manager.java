@@ -19,13 +19,12 @@ public class PCA9683Manager implements HSNPCA9685 {
     public PCA9683Manager(int address) throws IOException, I2CFactory.UnsupportedBusNumberException {
     }
 
+    public int getAddress() {
+        return 0;
+    }
 
     public void setAddress(int address) {
         this.address = address;
-    }
-
-    public int getAddress() {
-        return 0;
     }
 
     public void setFrequency(BigDecimal frequency) {

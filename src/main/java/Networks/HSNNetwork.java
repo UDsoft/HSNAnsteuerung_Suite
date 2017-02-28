@@ -8,7 +8,7 @@ import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class HSNNetwork{
+public class HSNNetwork {
 
 
     public HSNNetwork() {
@@ -17,20 +17,21 @@ public class HSNNetwork{
     /**
      * Get the IP address of the Device running the mosquitto Broker. It architecture that the Broker is
      * found in the same device where the manipulator is running
+     *
      * @param NetworkType Choose which network interface is used wireless or lan.
      * @return IP Address of the Mosquitto broker.
      */
     public String getIPAddress(NetworkType NetworkType) {
         String usedInterface;
-        switch(NetworkType){
+        switch (NetworkType) {
             case LAN:
-                usedInterface ="eth0";
+                usedInterface = "eth0";
                 break;
             case WIRELESS:
-                usedInterface ="wlan0";
+                usedInterface = "wlan0";
                 break;
             default:
-                usedInterface ="wlan0";
+                usedInterface = "wlan0";
 
         }
         String IPAddress = null;

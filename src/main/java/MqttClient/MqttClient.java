@@ -2,7 +2,7 @@ package MqttClient;
 
 
 import Data.HSNStandardData;
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
+import com.google.gson.Gson;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
@@ -35,19 +35,6 @@ public class MqttClient implements MqttCallback {
         return qos;
     }
 
-    public String getIpAddress() {
-        return ipAddress;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public String getClientID() {
-        return clientID;
-    }
-
-
     /*
     qos = Quality of Service::
     (0)->At most once
@@ -55,10 +42,10 @@ public class MqttClient implements MqttCallback {
     (2)->Exactly once.
      */
     public void setQos(int qos) {
-        if((qos <= 2) && (qos > -1)) {
+        if ((qos <= 2) && (qos > -1)) {
             this.qos = qos;
-        }else{
-            LOGGER.log(Level.WARNING,"QOS level was not 0 , 1 or 2");
+        } else {
+            LOGGER.log(Level.WARNING, "QOS level was not 0 , 1 or 2");
             System.out.println("QOS Level in MQTT only valid if : ");
             System.out.println("0  = At most once ");
             System.out.println("1 = At least once ");
@@ -66,16 +53,28 @@ public class MqttClient implements MqttCallback {
         }
     }
 
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
     /*
     ipAddress normal formatted ipaddress e.g:"192.168.1.101"
     the format is then changed to "tcp://ipaddress:".
      */
     public void setIpAddress(String ipAddress) {
-        this.ipAddress = "tcp://"+ipAddress+":";
+        this.ipAddress = "tcp://" + ipAddress + ":";
+    }
+
+    public int getPort() {
+        return port;
     }
 
     public void setPort(int port) {
         this.port = port;
+    }
+
+    public String getClientID() {
+        return clientID;
     }
 
     /*
@@ -86,7 +85,7 @@ public class MqttClient implements MqttCallback {
     }
 
     //True if mqttClient is connected to the Broker
-    public boolean isConnected(){
+    public boolean isConnected() {
         return mqttAsyncClient.isConnected();
     }
 
@@ -94,32 +93,32 @@ public class MqttClient implements MqttCallback {
     Return true if disconnected
     Return false if still connected
      */
-    public boolean disconnected(){
+    public boolean disconnected() {
         try {
             mqttAsyncClient.disconnect();
-            LOGGER.log(Level.INFO,"Raspberry Pi Master Controller Disconnected with the Broker");
+            LOGGER.log(Level.INFO, "Raspberry Pi Master Controller Disconnected with the Broker");
             return true;
         } catch (MqttException e) {
             e.printStackTrace();
-            LOGGER.log(Level.WARNING,e.getMessage().toString());
-            LOGGER.log(Level.WARNING,e.getCause().toString());
-            LOGGER.log(Level.WARNING,e.getLocalizedMessage().toString());
+            LOGGER.log(Level.WARNING, e.getMessage().toString());
+            LOGGER.log(Level.WARNING, e.getCause().toString());
+            LOGGER.log(Level.WARNING, e.getLocalizedMessage().toString());
 
         }
 
         return false;
     }
 
-    private String getBroker(){
+    private String getBroker() {
         String ipAddress = getIpAddress();
         int port = getPort();
-        return  ipAddress+port;
+        return ipAddress + port;
     }
 
-    public void connect(){
+    public void connect() {
         String broker = getBroker();
         try {
-            mqttAsyncClient = new MqttAsyncClient(broker,clientID,persistence);
+            mqttAsyncClient = new MqttAsyncClient(broker, clientID, persistence);
             MqttConnectOptions connectOptions = new MqttConnectOptions();
             connectOptions.setCleanSession(true);
             mqttAsyncClient.setCallback(this);
@@ -130,20 +129,20 @@ public class MqttClient implements MqttCallback {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(mqttAsyncClient.isConnected()){
+            if (mqttAsyncClient.isConnected()) {
                 System.out.println("Connected to broker: " + broker);
-            }else{
-                LOGGER.log(Level.SEVERE,"Error to connect to Broker "+MqttClient.class.getName()+"--- method connect ");
+            } else {
+                LOGGER.log(Level.SEVERE, "Error to connect to Broker " + MqttClient.class.getName() + "--- method connect ");
             }
         } catch (MqttException e) {
             e.printStackTrace();
         }
     }
 
-    public void subscribe(String topic, int qos) {
+    public void subscribe(String topic) {
         if (mqttAsyncClient.isConnected()) {
-            privateSub(topic,qos);
-        }else{
+            privateSub(topic);
+        } else {
             connect();
             System.out.println("Reconnecting to Broker");
             try {
@@ -151,14 +150,17 @@ public class MqttClient implements MqttCallback {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(isConnected()){
-                privateSub(topic,qos);
+            if (isConnected()) {
+                privateSub(topic);
+            }else{
+                LOGGER.log(Level.WARNING,"ERROR Connecting Broker while subscribing");
             }
         }
     }
-    private boolean privateSub(String topic , int qos){
+
+    private boolean privateSub(String topic) {
         try {
-            mqttAsyncClient.subscribe(topic,qos);
+            mqttAsyncClient.subscribe(topic, qos);
             System.out.println("Successfully subscribe to topic : " + topic);
             return true;
         } catch (MqttException e) {
@@ -168,17 +170,17 @@ public class MqttClient implements MqttCallback {
         }
     }
 
-    public void publish(String topic,String message,int qos){
+    public void publish(String topic, String message, int qos) {
         MqttMessage mqttMessage = new MqttMessage(message.getBytes());
         mqttMessage.setQos(qos);
-        if(mqttAsyncClient.isConnected()){
+        if (mqttAsyncClient.isConnected()) {
             try {
 
-                mqttAsyncClient.publish(topic,mqttMessage);
-                LOGGER.log(Level.INFO,message + "is published to Broker");
+                mqttAsyncClient.publish(topic, mqttMessage);
+                LOGGER.log(Level.INFO, message + "is published to Broker");
             } catch (MqttException e) {
                 e.printStackTrace();
-                LOGGER.log(Level.SEVERE,e.toString(),e);
+                LOGGER.log(Level.SEVERE, e.toString(), e);
             }
         }
 
@@ -197,8 +199,9 @@ public class MqttClient implements MqttCallback {
 
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
 
-        HSNStandardData data = new HSNStandardData(mqttMessage);
-
+        Gson gson = new Gson();
+        HSNStandardData data = gson.fromJson(mqttMessage.toString(),HSNStandardData.class);
+        System.out.println(data.getClientID());
 
     }
 
