@@ -9,8 +9,8 @@
         <module name="HSNAnsteuerung" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="HSNAnsteuerung" target="1.5" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="HSNAnsteuerung" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

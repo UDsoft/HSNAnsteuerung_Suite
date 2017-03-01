@@ -2,12 +2,15 @@ package MqttClient;
 
 
 import Data.HSNStandardData;
+import Data.InitData;
 import com.google.gson.Gson;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static MqttClient.Topic.*;
 
 public class MqttClient implements MqttCallback {
 
@@ -16,8 +19,8 @@ public class MqttClient implements MqttCallback {
 
 
     //Variable needed for this
-    MqttAsyncClient mqttAsyncClient;
-    MemoryPersistence persistence = new MemoryPersistence();
+    private MqttAsyncClient mqttAsyncClient;
+    private MemoryPersistence persistence;
 
     private int qos;
     private String ipAddress;
@@ -29,6 +32,7 @@ public class MqttClient implements MqttCallback {
         setIpAddress(ipAddress);
         setPort(port);
         setClientID(clientID);
+        persistence = new MemoryPersistence();
     }
 
     public int getQos() {
@@ -100,9 +104,7 @@ public class MqttClient implements MqttCallback {
             return true;
         } catch (MqttException e) {
             e.printStackTrace();
-            LOGGER.log(Level.WARNING, e.getMessage().toString());
             LOGGER.log(Level.WARNING, e.getCause().toString());
-            LOGGER.log(Level.WARNING, e.getLocalizedMessage().toString());
 
         }
 
@@ -139,7 +141,7 @@ public class MqttClient implements MqttCallback {
         }
     }
 
-    public void subscribe(String topic) {
+    public void subscribe(Topic topic) {
         if (mqttAsyncClient.isConnected()) {
             privateSub(topic);
         } else {
@@ -158,9 +160,9 @@ public class MqttClient implements MqttCallback {
         }
     }
 
-    private boolean privateSub(String topic) {
+    private boolean privateSub(Topic topic) {
         try {
-            mqttAsyncClient.subscribe(topic, qos);
+            mqttAsyncClient.subscribe(topic.getTopic(), qos);
             System.out.println("Successfully subscribe to topic : " + topic);
             return true;
         } catch (MqttException e) {
@@ -197,11 +199,28 @@ public class MqttClient implements MqttCallback {
 
     }
 
-    public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
+    public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
 
         Gson gson = new Gson();
-        HSNStandardData data = gson.fromJson(mqttMessage.toString(),HSNStandardData.class);
-        System.out.println(data.getClientID());
+        HSNStandardData data;
+
+        System.out.println(topic);
+        if(topic.equals(Topic.CLIENT_HANDSHAKE.getTopic())){
+            System.out.println("Client Hancshake process.");
+        }else if (topic.equals(Topic.INIT_PINS.getTopic())){
+            InitData initprocess = gson.fromJson(mqttMessage.toString(),InitData.class);
+            System.out.println("Initialization process.");
+        }else if(topic.contains(Topic.VALUE_PWM_0.getTopic())){
+            data = gson.fromJson(mqttMessage.toString(),HSNStandardData.class);
+            System.out.println("ClientID: " + data.getClientID());
+            System.out.println("PIN Number: " + data.getPinNumber());
+            System.out.println("PWM Value: " + data.getValue());
+        }else if(topic.contains(Topic.READ_CURRENT_0.getTopic())){
+            System.out.println("Read Current Command is received.");
+        }else if(topic.contains(Topic.READ_VOLTAGE_0.getTopic())){
+            System.out.println("Read Voltage Command is received.");
+        }
+
 
     }
 

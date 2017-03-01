@@ -1,0 +1,32 @@
+{
+  clientID: "",
+  status: "init/handshake/output/read",
+  handshake: {
+    clientID: "name"
+  },
+  init: [
+    {
+      pinNumber: 1,
+      board: "raspberrypi/pca9685",
+      type: "output",
+      unit: "@only input type"
+    },
+    {
+      pinNumber: 2,
+      board: "pca9685",
+      type: "output",
+      unit: ""
+    },
+    {
+      pinNumber: 12,
+      board: "raspberrypi",
+      type: "input",
+      unit: "Voltage/Current"
+    }
+  ],
+  output: {
+    pinNumber: 1,
+    pwm_value: 121
+  },
+  read_VA: 1
+}

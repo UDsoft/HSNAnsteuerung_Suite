@@ -15,7 +15,6 @@ public class Main {
     public static void main(String[] args) throws UnknownHostException, SocketException {
 
         HSNNetwork network = new HSNNetwork();
-        PubSubProtocol pubSubProtocol = new PubSubProtocol();
 
 
         //Start The Broker
@@ -42,9 +41,11 @@ public class Main {
 
         mqttClient.connect();
 
+        //First Topic to be INIT
         if(mqttClient.isConnected()){
             System.out.println("Welcome to UDTECH");
-            mqttClient.subscribe(pubSubProtocol.subscribeTopic(Topic.CLIENTHANDSHAKE));
+            mqttClient.subscribe(Topic.CLIENT_HANDSHAKE);
+            mqttClient.subscribe(Topic.INIT_PINS);
 
         }
 
