@@ -6,8 +6,12 @@ import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
  * Created by darwin on 27.02.17.
+ * As there is many option of mqtt broker available out there. This Class is used
+ * to extend the capability of calling standard function of the mqtt broker regardless what mqtt broker.
+ *
  */
 public class MqttBroker {
 

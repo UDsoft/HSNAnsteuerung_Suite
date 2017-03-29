@@ -5,32 +5,12 @@ package MqttClient;
  */
 public enum Topic {
 
-    /**
-     String valuePWM = "/read/value/pwm/";
-     String init = "/init/";
-     String readVoltage = "/read/voltage/";
-     String readCurrent = "/read/current";
-     **/
 
-    CLIENT_HANDSHAKE("/init/handshake"),
-    INIT_PINS("/init/pin"),
-    VALUE_PWM_0("/read/value/pwm/0"),
-    VALUE_PWM_1("/read/value/pwm/1"),
-    VALUE_PWM_2("/read/value/pwm/2"),
-    VALUE_PWM_3("/read/value/pwm/3"),
-    VALUE_PWM_4("/read/value/pwm/4"),
-    VALUE_PWM_5("/read/value/pwm/5"),
-    VALUE_PWM_6("/read/value/pwm/6"),
-    VALUE_PWM_7("/read/value/pwm/7"),
-    VALUE_PWM_8("/read/value/pwm/8"),
-    VALUE_PWM_9("/read/value/pwm/9"),
-    VALUE_PWM_10("/read/value/pwm/10"),
-    VALUE_PWM_11("/read/value/pwm/11"),
-    VALUE_PWM_12("/read/value/pwm/12"),
-    VALUE_PWM_13("/read/value/pwm/13"),
-    VALUE_PWM_14("/read/value/pwm/14"),
-    VALUE_PWM_15("/read/value/pwm/15"),
+    VALUE_PWM_X("/set/value/pwm/x"),
+    VALUE_PWM_Y("/set/value/pwm/y"),
+    VALUE_PWM_Z("/set/value/pwm/z"),
 
+    //Future
     //Topic for Reading the current.
     READ_CURRENT_0("/read/current/0"),
     READ_CURRENT_1("/read/current/1"),

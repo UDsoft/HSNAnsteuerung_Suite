@@ -1,6 +1,7 @@
 package ExtensionBoard;
 
 import com.pi4j.gpio.extension.pca.PCA9685Pin;
+import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.i2c.I2CBus;
 
 import java.math.BigDecimal;
@@ -15,11 +16,11 @@ public interface HSNPCA9685 {
 
     public void setFrequency(BigDecimal frequency);
 
-    public void setGpioProvider(I2CBus bus, int address, BigDecimal frequency, BigDecimal frequencyCorrectionFactopr);
+    public void setGpioProvider();
 
-    public boolean initGpioPins();
+    public void initGpioPins();
 
-    public boolean setPwm(PCA9685Pin pin, int stepValue);
+    public void setPwm(Pin pin, int stepValue);
 
     public boolean shutDownGpio();
 
