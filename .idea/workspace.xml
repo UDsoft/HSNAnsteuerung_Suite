@@ -6,19 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="088c69de-5b7a-4fe8-8862-198fbbf8838e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/ExtensionBoard/PinGroup.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_pi4j_pi4j_core_1_2_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_pi4j_pi4j_core_1_2_SNAPSHOT.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_pi4j_pi4j_gpio_extension_1_2_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_pi4j_pi4j_gpio_extension_1_2_SNAPSHOT.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/HSNAnsteuerung.iml" afterPath="$PROJECT_DIR$/HSNAnsteuerung.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Data/HSNStandardData.java" afterPath="$PROJECT_DIR$/src/main/java/Data/HSNStandardData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ExtensionBoard/HSNPCA9685.java" afterPath="$PROJECT_DIR$/src/main/java/ExtensionBoard/HSNPCA9685.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ExtensionBoard/PCA9683Manager.java" afterPath="$PROJECT_DIR$/src/main/java/ExtensionBoard/PCA9683Manager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Main.java" afterPath="$PROJECT_DIR$/src/main/java/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MqttClient/MqttClient.java" afterPath="$PROJECT_DIR$/src/main/java/MqttClient/MqttClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MqttClient/Topic.java" afterPath="$PROJECT_DIR$/src/main/java/MqttClient/Topic.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -967,7 +955,7 @@
       <workItem from="1489183034038" duration="3102000" />
       <workItem from="1489231229901" duration="5302000" />
       <workItem from="1490760466454" duration="31000" />
-      <workItem from="1490794625688" duration="7633000" />
+      <workItem from="1490794625688" duration="7658000" />
     </task>
     <task id="LOCAL-00001" summary="Version 1 Json Data Pattern finalised">
       <created>1488341386466</created>
@@ -976,11 +964,18 @@
       <option name="project" value="LOCAL" />
       <updated>1488341386466</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="working prototype">
+      <created>1490802354150</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1490802354150</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85176000" />
+    <option name="totallyTimeSpent" value="85201000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1065,7 +1060,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Version 1 Json Data Pattern finalised" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 1 Json Data Pattern finalised" />
+    <MESSAGE value="working prototype" />
+    <option name="LAST_COMMIT_MESSAGE" value="working prototype" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
