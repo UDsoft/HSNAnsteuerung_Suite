@@ -98,6 +98,23 @@ public class PCA9683Manager implements HSNPCA9685 {
         }
     }
 
+    //step = gradient*percentage + stepValueWhenZeroPercentage.
+    //https://revisionmaths.com/gcse-maths-revision/algebra/gradients-and-graphs
+    private int stepValue(int zeroPercentageValue,int maxPercentageValue, int cValue,int gradient){
+
+        int step = 0;
+
+
+        return step;
+
+    }
+
+    //Search gradient for the value(x1,y1) and (x2,y2)
+    private int gradient(int x1 , int x2 , int y1,int y2){
+        int gradient = (y1-y2)/(x1-x2);
+        return gradient;
+    }
+
     private void setPwm(Pin pin, int stepValue) {
 
         gpioProvider.setPwm(pin,stepValue);
