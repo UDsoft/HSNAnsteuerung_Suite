@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: com.pi4j:pi4j-core:1.2-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/pi4j/pi4j-core/1.2-SNAPSHOT/pi4j-core-1.2-20170225.213035-26.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/pi4j/pi4j-core/1.2-SNAPSHOT/pi4j-core-1.2-20170315.140839-28.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/com/pi4j/pi4j-core/1.2-SNAPSHOT/pi4j-core-1.2-20170225.213035-26-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/pi4j/pi4j-core/1.2-SNAPSHOT/pi4j-core-1.2-20170315.140839-28-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/pi4j/pi4j-core/1.2-SNAPSHOT/pi4j-core-1.2-20170225.213035-26-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/pi4j/pi4j-core/1.2-SNAPSHOT/pi4j-core-1.2-20170315.140839-28-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

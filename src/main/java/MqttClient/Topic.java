@@ -9,6 +9,7 @@ public enum Topic {
     VALUE_PWM_X("/set/value/pwm/x"),
     VALUE_PWM_Y("/set/value/pwm/y"),
     VALUE_PWM_Z("/set/value/pwm/z"),
+    VALUE_PWM_PINS("/pin/value"),
 
     //Future
     //Topic for Reading the current.

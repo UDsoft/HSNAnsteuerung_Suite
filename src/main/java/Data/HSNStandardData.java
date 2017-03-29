@@ -1,5 +1,7 @@
 package Data;
 
+
+import ExtensionBoard.PinGroup;
 import com.google.gson.Gson;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
@@ -7,52 +9,53 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
  * Created by darwin on 27.02.17.
  */
 public class HSNStandardData {
-    /**
-     * {
-     * clientID:"clientName",
-     * name:"pinName",
-     * pin_number:"",
-     * value:"",
-     * isOutput:"true/false"
-     * unit:"",
-     * description:""
-     * }
-     * }
-     */
 
-    private String name;
-    private String pinNumber;
-    private String value;
-    private boolean isOutput;
-    private String unit;
-    private String description;
-    private String clientID;
-
+    private String werte;
+    private String group;
     /**
      * Empty Constructor
      */
     public HSNStandardData() {
+
     }
 
-    /**
-     * @param name        : name of the
-     * @param clientID    : device ID which is the owner of the msg
-     * @param pinNumber   : pin number produce the output
-     * @param value       : value of the output
-     * @param isOutput    : True if it is an OUTPUT / False if it is meant to be INPUT
-     * @param unit        : Scientific unit of the value
-     * @param description : random description of the value.
-     */
-    public HSNStandardData(String name, String clientID, String pinNumber,
-                           String value, boolean isOutput, String unit,
-                           String description) {
-        this.name = name;
-        this.clientID = clientID;
-        this.pinNumber = pinNumber;
-        this.value = value;
-        this.isOutput = isOutput;
-        this.unit = unit;
-        this.description = description;
+    //Constructor with the value and group name
+    public HSNStandardData(String werte, String group) {
+        this.werte = werte;
+        this.group = group;
+    }
+
+
+    public String getWerte() {
+        return werte;
+    }
+
+    public void setWerte(String werte) {
+        this.werte = werte;
+    }
+
+    public PinGroup getGroup() {
+        PinGroup pinGroup = null;
+        switch (group){
+            case "X":
+                pinGroup= PinGroup.X;
+                break;
+            case "Y":
+                pinGroup =  PinGroup.Y;
+                break;
+            case "Z":
+                pinGroup =  PinGroup.Z;
+                break;
+            default:
+                System.out.println("ERROR in knowing the Group");
+                break;
+        }
+
+        return pinGroup;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 
     /**
@@ -62,6 +65,7 @@ public class HSNStandardData {
      */
     public HSNStandardData(MqttMessage data) {
         Gson gson = new Gson();
+
         gson.fromJson(data.toString(), HSNStandardData.class);
     }
 
@@ -75,59 +79,5 @@ public class HSNStandardData {
         return json;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPinNumber() {
-        return pinNumber;
-    }
-
-    public void setPinNumber(String pinNumber) {
-        this.pinNumber = pinNumber;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public boolean isOutput() {
-        return isOutput;
-    }
-
-    public void setOutput(boolean output) {
-        isOutput = output;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getClientID() {
-        return clientID;
-    }
-
-    public void setClientID(String clientID) {
-        this.clientID = clientID;
-    }
 }

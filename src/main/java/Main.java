@@ -2,7 +2,9 @@ import MqttBroker.MqttBroker;
 import MqttClient.*;
 import Networks.HSNNetwork;
 import Networks.NetworkType;
+import com.pi4j.io.i2c.I2CFactory;
 
+import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
@@ -12,7 +14,7 @@ import static MqttBroker.MqttBroker.brokerList.MOSQUITTO;
  * Created by darwin on 25.02.17.
  */
 public class Main {
-    public static void main(String[] args) throws UnknownHostException, SocketException {
+    public static void main(String[] args) throws IOException, I2CFactory.UnsupportedBusNumberException {
 
         HSNNetwork network = new HSNNetwork();
 
@@ -32,7 +34,7 @@ public class Main {
         }
 
 
-        String ipAddress = network.getIPAddress(NetworkType.LAN);
+        String ipAddress = network.getIPAddress(NetworkType.WIRELESS);
         int qos = 2;
         int port = 1883;
         String clientID = "UDLogic";
@@ -44,12 +46,12 @@ public class Main {
         //First Topic to be INIT
         if(mqttClient.isConnected()){
             System.out.println("Welcome to UDTECH");
-            mqttClient.subscribe(Topic.CLIENT_HANDSHAKE);
-            mqttClient.subscribe(Topic.INIT_PINS);
+            mqttClient.subscribe(Topic.VALUE_PWM_PINS);
 
         }
 
         while (mqttClient.isConnected()){
+
 
         }
 

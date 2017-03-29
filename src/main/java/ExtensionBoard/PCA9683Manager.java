@@ -16,11 +16,12 @@ import java.math.BigDecimal;
  */
 public class PCA9683Manager implements HSNPCA9685 {
 
-    private int address;
+    private int address = 0x40;
     private I2CBus bus = I2CFactory.getInstance(I2CBus.BUS_1);
     private PCA9685GpioProvider gpioProvider;
-    private BigDecimal frequency;
-    private BigDecimal frequencyCorrectionFactor;
+    private BigDecimal frequency = new BigDecimal("1000");
+    private BigDecimal frequencyCorrectionFactor = new BigDecimal(1.0578);
+    GpioController gpio = GpioFactory.getInstance();
 
 
     public PCA9683Manager(int address, BigDecimal frequency, BigDecimal frequencyCorrectionFactor) throws IOException, I2CFactory.UnsupportedBusNumberException {
@@ -28,6 +29,12 @@ public class PCA9683Manager implements HSNPCA9685 {
         setGpioProvider();
         initGpioPins();
 
+    }
+
+    //Using the Standard Value as defined.
+    public PCA9683Manager() throws IOException, I2CFactory.UnsupportedBusNumberException {
+        setGpioProvider();
+        initGpioPins();
     }
 
     public int getAddress() {
@@ -45,6 +52,7 @@ public class PCA9683Manager implements HSNPCA9685 {
     public void setGpioProvider() {
         try {
             gpioProvider = new PCA9685GpioProvider(bus, address, frequency, frequencyCorrectionFactor);
+            System.out.println("Done Set GPIO Provider");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,35 +60,54 @@ public class PCA9683Manager implements HSNPCA9685 {
 
     //initialize the GPIOPINS in PCA9685 to be output pwm
     public void initGpioPins() {
-        GpioController gpio = GpioFactory.getInstance();
 
-        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_00, "Pulse 00");
-        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_01, "Pulse 01");
-        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_02, "Pulse 02");
-        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_03, "Pulse 03");
-        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_04, "Pulse 04");
-        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_05, "Pulse 05");
-        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_06, "Pulse 06");
-        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_07, "Pulse 07");
-        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_08, "Pulse 08");
-        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_09, "Pulse 09");
-        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_10, "Always ON");
-        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_11, "Always OFF");
-        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_12, "Servo pulse MIN");
-        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_13, "Servo pulse NEUTRAL");
-        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_14, "Servo pulse MAX");
-        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_15, "not used");
+
+        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_00, "Volt X");
+        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_01, "Amp X");
+        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_02, "Volt Y");
+        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_03, "Amp Y");
+        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_04, "VOLT Z");
+        gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_05, "Amp Z");
+
+        System.out.println("Done initialising GPIOs");
 
     }
 
-    public void setPwm(Pin pin, int stepValue) {
+    @Override
+    public void setPwm(PinGroup pinGroup, int percentage) {
+
+        switch (pinGroup){
+            case X:
+                System.out.println("Setting PWM Value X");
+                setPwm(PCA9685Pin.PWM_00,percentage * 5 +112);
+                setPwm(PCA9685Pin.PWM_01,percentage * 5 + 112);
+                break;
+            case Y:
+                System.out.println("Setting PWM Value Y");
+                setPwm(PCA9685Pin.PWM_02,percentage + 112);
+                setPwm(PCA9685Pin.PWM_03,percentage + 112);
+                break;
+            case Z:
+                System.out.println("Setting PWM Value Z");
+                setPwm(PCA9685Pin.PWM_04,percentage + 112);
+                setPwm(PCA9685Pin.PWM_05,percentage + 112);
+                break;
+            default:
+                System.out.println("ERROR Group is not Valid");
+
+        }
+    }
+
+    private void setPwm(Pin pin, int stepValue) {
 
         gpioProvider.setPwm(pin,stepValue);
 
     }
 
 
+
     public boolean shutDownGpio() {
         return false;
     }
+
 }

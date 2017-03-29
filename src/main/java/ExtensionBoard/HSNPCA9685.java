@@ -20,7 +20,7 @@ public interface HSNPCA9685 {
 
     public void initGpioPins();
 
-    public void setPwm(Pin pin, int stepValue);
+    public void setPwm(PinGroup pinGroup, int stepValue);
 
     public boolean shutDownGpio();
 

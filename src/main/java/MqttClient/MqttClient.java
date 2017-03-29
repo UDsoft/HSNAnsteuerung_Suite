@@ -3,10 +3,13 @@ package MqttClient;
 
 import Data.HSNStandardData;
 import Data.InitData;
+import ExtensionBoard.PCA9683Manager;
 import com.google.gson.Gson;
+import com.pi4j.io.i2c.I2CFactory;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,6 +20,7 @@ public class MqttClient implements MqttCallback {
     //Record all the issue and actions in this logger.
     private final static Logger LOGGER = Logger.getLogger(MqttClient.class.getName());
 
+    PCA9683Manager pinManager = new PCA9683Manager();
 
     //Variable needed for this
     private MqttAsyncClient mqttAsyncClient;
@@ -27,7 +31,7 @@ public class MqttClient implements MqttCallback {
     private int port;
     private String clientID;
 
-    public MqttClient(int qos, String ipAddress, int port, String clientID) {
+    public MqttClient(int qos, String ipAddress, int port, String clientID) throws IOException, I2CFactory.UnsupportedBusNumberException {
         setQos(qos);
         setIpAddress(ipAddress);
         setPort(port);
@@ -204,22 +208,17 @@ public class MqttClient implements MqttCallback {
         Gson gson = new Gson();
         HSNStandardData data;
 
+
         System.out.println(topic);
-        if(topic.equals(Topic.CLIENT_HANDSHAKE.getTopic())){
-            System.out.println("Client Hancshake process.");
-        }else if (topic.equals(Topic.INIT_PINS.getTopic())){
-            InitData initprocess = gson.fromJson(mqttMessage.toString(),InitData.class);
-            System.out.println("Initialization process.");
-        }else if(topic.contains(Topic.VALUE_PWM_0.getTopic())){
-            data = gson.fromJson(mqttMessage.toString(),HSNStandardData.class);
-            System.out.println("ClientID: " + data.getClientID());
-            System.out.println("PIN Number: " + data.getPinNumber());
-            System.out.println("PWM Value: " + data.getValue());
-        }else if(topic.contains(Topic.READ_CURRENT_0.getTopic())){
-            System.out.println("Read Current Command is received.");
-        }else if(topic.contains(Topic.READ_VOLTAGE_0.getTopic())){
-            System.out.println("Read Voltage Command is received.");
-        }
+
+        System.out.println( mqttMessage.toString());
+
+        data = gson.fromJson(mqttMessage.toString(),HSNStandardData.class);
+
+        System.out.println("Group name : " + data.getGroup());
+        System.out.println("Werte  : " + data.getWerte());
+
+        pinManager.setPwm(data.getGroup(),Integer.parseInt(data.getWerte()));
 
 
     }
