@@ -1,5 +1,6 @@
 package ExtensionBoard;
 
+import Messumformer.HSNAusgang;
 import com.pi4j.gpio.extension.pca.PCA9685GpioProvider;
 import com.pi4j.gpio.extension.pca.PCA9685Pin;
 import com.pi4j.io.gpio.GpioController;
@@ -23,6 +24,13 @@ public class PCA9683Manager implements HSNPCA9685 {
     private BigDecimal frequencyCorrectionFactor = new BigDecimal(1.0578);
     GpioController gpio = GpioFactory.getInstance();
 
+    //Set the Output properties based on measured Current and Voltage
+    HSNAusgang XVoltage = new HSNAusgang(38,595,38);
+    HSNAusgang XCurrent = new HSNAusgang(113,636,112);
+    HSNAusgang YVoltage = new HSNAusgang(109,589,109);
+    HSNAusgang YCurrent = new HSNAusgang(108,634,108);
+    HSNAusgang ZVoltage = new HSNAusgang(111,593,111);
+    HSNAusgang ZCurrent = new HSNAusgang(112,638,112);
 
     public PCA9683Manager(int address, BigDecimal frequency, BigDecimal frequencyCorrectionFactor) throws IOException, I2CFactory.UnsupportedBusNumberException {
 
@@ -59,7 +67,8 @@ public class PCA9683Manager implements HSNPCA9685 {
     }
 
     //initialize the GPIOPINS in PCA9685 to be output pwm
-    public void initGpioPins() {
+    public void initGpioPins()
+    {
 
 
         gpio.provisionPwmOutputPin(gpioProvider, PCA9685Pin.PWM_00, "Volt X");
@@ -72,25 +81,24 @@ public class PCA9683Manager implements HSNPCA9685 {
         System.out.println("Done initialising GPIOs");
 
     }
-
     @Override
     public void setPwm(PinGroup pinGroup, int percentage) {
 
         switch (pinGroup){
             case X:
                 System.out.println("Setting PWM Value X");
-                setPwm(PCA9685Pin.PWM_00,percentage * 5 +112);
-                setPwm(PCA9685Pin.PWM_01,percentage * 5 + 112);
+                setPwm(PCA9685Pin.PWM_00,(int)XVoltage.getOutput(percentage));
+                setPwm(PCA9685Pin.PWM_01,(int)XCurrent.getOutput(percentage));
                 break;
             case Y:
                 System.out.println("Setting PWM Value Y");
-                setPwm(PCA9685Pin.PWM_02,percentage + 112);
-                setPwm(PCA9685Pin.PWM_03,percentage + 112);
+                setPwm(PCA9685Pin.PWM_02,(int)YVoltage.getOutput(percentage));
+                setPwm(PCA9685Pin.PWM_03,(int)YCurrent.getOutput(percentage));
                 break;
             case Z:
                 System.out.println("Setting PWM Value Z");
-                setPwm(PCA9685Pin.PWM_04,percentage + 112);
-                setPwm(PCA9685Pin.PWM_05,percentage + 112);
+                setPwm(PCA9685Pin.PWM_04,(int)ZVoltage.getOutput(percentage));
+                setPwm(PCA9685Pin.PWM_05,(int)ZCurrent.getOutput(percentage));
                 break;
             default:
                 System.out.println("ERROR Group is not Valid");
@@ -109,11 +117,6 @@ public class PCA9683Manager implements HSNPCA9685 {
 
     }
 
-    //Search gradient for the value(x1,y1) and (x2,y2)
-    private int gradient(int x1 , int x2 , int y1,int y2){
-        int gradient = (y1-y2)/(x1-x2);
-        return gradient;
-    }
 
     private void setPwm(Pin pin, int stepValue) {
 
