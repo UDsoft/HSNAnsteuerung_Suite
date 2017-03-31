@@ -25,8 +25,8 @@ public class PCA9683Manager implements HSNPCA9685 {
     GpioController gpio = GpioFactory.getInstance();
 
     //Set the Output properties based on measured Current and Voltage
-    HSNAusgang XVoltage = new HSNAusgang(38,595,38);
-    HSNAusgang XCurrent = new HSNAusgang(113,636,112);
+    HSNAusgang XVoltage = new HSNAusgang(5,100,55,595,37,-2);
+    HSNAusgang XCurrent = new HSNAusgang(5,80 ,53,512,53,-1);
     HSNAusgang YVoltage = new HSNAusgang(109,589,109);
     HSNAusgang YCurrent = new HSNAusgang(108,634,108);
     HSNAusgang ZVoltage = new HSNAusgang(111,593,111);

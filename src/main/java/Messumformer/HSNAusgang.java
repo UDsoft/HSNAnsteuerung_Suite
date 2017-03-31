@@ -72,11 +72,6 @@ public class HSNAusgang implements Output{
         this.input = (double)input;
         double output = 0;
 
-        
-        if(input < 1){
-            output = 35;
-            System.out.println("OUTPUT VALUE : " + output);
-        }else {
 
             //Y = mx + b
             output = (gradient * input) + yIntercept + correction;
@@ -84,7 +79,7 @@ public class HSNAusgang implements Output{
             System.out.println("The Value of Gradient is : " + gradient);
             System.out.println("The Value for Y Intercept is : " + yIntercept);
             System.out.println("The Value for the correction is " + correction);
-        }
+
 
         return output;
     }
