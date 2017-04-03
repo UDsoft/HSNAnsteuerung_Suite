@@ -25,8 +25,9 @@ public class PCA9683Manager implements HSNPCA9685 {
     GpioController gpio = GpioFactory.getInstance();
 
     //Set the Output properties based on measured Current and Voltage
-    HSNAusgang XVoltage = new HSNAusgang(5,100,55,595,37,-2);
-    HSNAusgang XCurrent = new HSNAusgang(5,80 ,53,512,53,-1);
+    HSNAusgang XVoltage_20till100 = new HSNAusgang(20,100,115,600,115 );
+    HSNAusgang XVoltage_20Percentage  = new HSNAusgang(0,20,40,111,40,-2);
+    HSNAusgang XCurrent = new HSNAusgang(0,100 ,5,640,5,-1);
     HSNAusgang YVoltage = new HSNAusgang(109,589,109);
     HSNAusgang YCurrent = new HSNAusgang(108,634,108);
     HSNAusgang ZVoltage = new HSNAusgang(111,593,111);
@@ -87,9 +88,10 @@ public class PCA9683Manager implements HSNPCA9685 {
         switch (pinGroup){
             case X:
                 System.out.println("Setting PWM Value X");
-                setPwm(PCA9685Pin.PWM_00,(int)XVoltage.getOutput(percentage));
-                setPwm(PCA9685Pin.PWM_01,(int)XCurrent.getOutput(percentage));
-                break;
+                    settingPWM_XVoltage(percentage);
+                    settingPWM_XCurrent(percentage);
+                    break;
+
             case Y:
                 System.out.println("Setting PWM Value Y");
                 setPwm(PCA9685Pin.PWM_02,(int)YVoltage.getOutput(percentage));
@@ -117,10 +119,69 @@ public class PCA9683Manager implements HSNPCA9685 {
 
     }
 
+    private void settingPWM_XVoltage(int percentage){
+        if(percentage < 20){
+            if(percentage >= 4 && percentage <7){
+                setPwm(PCA9685Pin.PWM_00,(int)XVoltage_20Percentage.getOutput(percentage) - 2);
+            }
+            else if(percentage >= 7&& percentage <=14){
+                setPwm(PCA9685Pin.PWM_00,(int) XVoltage_20Percentage.getOutput(percentage-1));
 
-    private void setPwm(Pin pin, int stepValue) {
+            }else if(percentage >=16 && percentage <=18){
+                setPwm(PCA9685Pin.PWM_00, (int) XVoltage_20Percentage.getOutput(percentage)+5);
 
-        gpioProvider.setPwm(pin,stepValue);
+            }else if(percentage >= 19){
+                setPwm(PCA9685Pin.PWM_00, (int) XVoltage_20Percentage.getOutput(percentage)+9);
+
+            }
+            else{
+                setPwm(PCA9685Pin.PWM_00, (int) XVoltage_20Percentage.getOutput(percentage));
+
+            }
+        }else{
+            if(percentage <=20){
+                setPwm(PCA9685Pin.PWM_00,(int)XVoltage_20till100.getOutput(percentage-20)+3);
+
+            }
+            System.out.println("Using Value X more or equal 20");
+            setPwm(PCA9685Pin.PWM_00,(int)XVoltage_20till100.getOutput(percentage-20));
+        }
+    }
+
+    private void settingPWM_XCurrent(int percentage){
+        if(percentage <= 2){
+            System.out.println("Less then 2 Amp percentage");
+            setPwm(PCA9685Pin.PWM_01,(int)XCurrent.getOutput(percentage));
+        }else if(percentage > 2 && percentage <=4){
+            System.out.println("2 -4 ");
+            setPwm(PCA9685Pin.PWM_01,(int)XCurrent.getOutput(percentage));
+
+        }else{
+            System.out.println("4 and above");
+            setPwm(PCA9685Pin.PWM_01,(int)XCurrent.getOutput(percentage));
+        }
+    }
+
+    private void settingPWM_YVoltage(int percentage){
+
+    }
+
+    private void settingPWM_YCurrent(int percentage){
+
+    }
+
+    private void settingPWM_ZVoltage(int percentage){
+
+    }
+
+    private void settingPWM_ZCurrent(int percentage){
+
+    }
+
+
+    private void setPwm(Pin pin, int duration) {
+
+        gpioProvider.setPwm(pin,duration);
 
     }
 

@@ -13,8 +13,8 @@ public class HSNAusgang implements Output{
     */
 
     private double gradient;
-    private double firstPercentage = 0;
-    private double lastPercentage = 100;
+    private double firstPercentage ;
+    private double lastPercentage ;
 
     private double firstStep;
     private double lastStep;
@@ -34,6 +34,8 @@ public class HSNAusgang implements Output{
     }
 
     public HSNAusgang(int firstStep, int lastStep, int yIntercept) {
+        this.firstPercentage = 0;
+        this.lastPercentage = 100;
         this.firstStep = (double)firstStep;
         this.lastStep = (double)lastStep;
         this.yIntercept = (double)yIntercept;
@@ -53,6 +55,8 @@ public class HSNAusgang implements Output{
     }
 
     public HSNAusgang(int firstStep, int lastStep, int yIntercept, int correction) {
+        this.firstPercentage = 0;
+        this.lastPercentage = 100;
         this.firstStep = (double)firstStep;
         this.lastStep = (double)lastStep;
         this.yIntercept = (double)yIntercept;
