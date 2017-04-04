@@ -1,6 +1,12 @@
 package ExtensionBoard;
 
 import Messumformer.HSNAusgang;
+import Messumformer.Values.X.XCurrent;
+import Messumformer.Values.X.XVoltage;
+import Messumformer.Values.Y.YCurrent;
+import Messumformer.Values.Y.YVoltage;
+import Messumformer.Values.Z.ZCurrent;
+import Messumformer.Values.Z.ZVoltage;
 import com.pi4j.gpio.extension.pca.PCA9685GpioProvider;
 import com.pi4j.gpio.extension.pca.PCA9685Pin;
 import com.pi4j.io.gpio.GpioController;
@@ -24,14 +30,13 @@ public class PCA9683Manager implements HSNPCA9685 {
     private BigDecimal frequencyCorrectionFactor = new BigDecimal(1.0578);
     GpioController gpio = GpioFactory.getInstance();
 
-    //Set the Output properties based on measured Current and Voltage
-    HSNAusgang XVoltage_20till100 = new HSNAusgang(20,100,115,600,115 );
-    HSNAusgang XVoltage_20Percentage  = new HSNAusgang(0,20,40,111,40,-2);
-    HSNAusgang XCurrent = new HSNAusgang(0,100 ,5,640,5,-1);
-    HSNAusgang YVoltage = new HSNAusgang(109,589,109);
-    HSNAusgang YCurrent = new HSNAusgang(108,634,108);
-    HSNAusgang ZVoltage = new HSNAusgang(111,593,111);
-    HSNAusgang ZCurrent = new HSNAusgang(112,638,112);
+    private XVoltage xVoltage = XVoltage.getInstance();
+    private XCurrent xCurrent = XCurrent.getInstance();
+    private YCurrent yCurrent = YCurrent.getInstance();
+    private YVoltage yVoltage = YVoltage.getInstance();
+    private ZCurrent zCurrent = ZCurrent.getInstance();
+    private ZVoltage zVoltage = ZVoltage.getInstance();
+
 
     public PCA9683Manager(int address, BigDecimal frequency, BigDecimal frequencyCorrectionFactor) throws IOException, I2CFactory.UnsupportedBusNumberException {
 
@@ -88,94 +93,24 @@ public class PCA9683Manager implements HSNPCA9685 {
         switch (pinGroup){
             case X:
                 System.out.println("Setting PWM Value X");
-                    settingPWM_XVoltage(percentage);
-                    settingPWM_XCurrent(percentage);
-                    break;
+                setPwm(PCA9685Pin.PWM_00,xVoltage.getDuration(percentage));
+                setPwm(PCA9685Pin.PWM_01,xCurrent.getDuration(percentage));
+                break;
 
             case Y:
                 System.out.println("Setting PWM Value Y");
-                setPwm(PCA9685Pin.PWM_02,(int)YVoltage.getOutput(percentage));
-                setPwm(PCA9685Pin.PWM_03,(int)YCurrent.getOutput(percentage));
+                setPwm(PCA9685Pin.PWM_02,yVoltage.getDuration(percentage));
+                setPwm(PCA9685Pin.PWM_03,yCurrent.getDuration(percentage));
                 break;
             case Z:
                 System.out.println("Setting PWM Value Z");
-                setPwm(PCA9685Pin.PWM_04,(int)ZVoltage.getOutput(percentage));
-                setPwm(PCA9685Pin.PWM_05,(int)ZCurrent.getOutput(percentage));
+                setPwm(PCA9685Pin.PWM_04,zVoltage.getDuration(percentage));
+                setPwm(PCA9685Pin.PWM_05,zCurrent.getDuration(percentage));
                 break;
             default:
                 System.out.println("ERROR Group is not Valid");
 
         }
-    }
-
-    //step = gradient*percentage + stepValueWhenZeroPercentage.
-    //https://revisionmaths.com/gcse-maths-revision/algebra/gradients-and-graphs
-    private int stepValue(int zeroPercentageValue,int maxPercentageValue, int cValue,int gradient){
-
-        int step = 0;
-
-
-        return step;
-
-    }
-
-    private void settingPWM_XVoltage(int percentage){
-        if(percentage < 20){
-            if(percentage >= 4 && percentage <7){
-                setPwm(PCA9685Pin.PWM_00,(int)XVoltage_20Percentage.getOutput(percentage) - 2);
-            }
-            else if(percentage >= 7&& percentage <=14){
-                setPwm(PCA9685Pin.PWM_00,(int) XVoltage_20Percentage.getOutput(percentage-1));
-
-            }else if(percentage >=16 && percentage <=18){
-                setPwm(PCA9685Pin.PWM_00, (int) XVoltage_20Percentage.getOutput(percentage)+5);
-
-            }else if(percentage >= 19){
-                setPwm(PCA9685Pin.PWM_00, (int) XVoltage_20Percentage.getOutput(percentage)+9);
-
-            }
-            else{
-                setPwm(PCA9685Pin.PWM_00, (int) XVoltage_20Percentage.getOutput(percentage));
-
-            }
-        }else{
-            if(percentage <=20){
-                setPwm(PCA9685Pin.PWM_00,(int)XVoltage_20till100.getOutput(percentage-20)+3);
-
-            }
-            System.out.println("Using Value X more or equal 20");
-            setPwm(PCA9685Pin.PWM_00,(int)XVoltage_20till100.getOutput(percentage-20));
-        }
-    }
-
-    private void settingPWM_XCurrent(int percentage){
-        if(percentage <= 2){
-            System.out.println("Less then 2 Amp percentage");
-            setPwm(PCA9685Pin.PWM_01,(int)XCurrent.getOutput(percentage));
-        }else if(percentage > 2 && percentage <=4){
-            System.out.println("2 -4 ");
-            setPwm(PCA9685Pin.PWM_01,(int)XCurrent.getOutput(percentage));
-
-        }else{
-            System.out.println("4 and above");
-            setPwm(PCA9685Pin.PWM_01,(int)XCurrent.getOutput(percentage));
-        }
-    }
-
-    private void settingPWM_YVoltage(int percentage){
-
-    }
-
-    private void settingPWM_YCurrent(int percentage){
-
-    }
-
-    private void settingPWM_ZVoltage(int percentage){
-
-    }
-
-    private void settingPWM_ZCurrent(int percentage){
-
     }
 
 

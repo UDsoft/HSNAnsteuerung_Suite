@@ -1,17 +1,18 @@
-package Messumformer.Values.X;
+package Messumformer.Values.Y;
 
 /**
  * Created by udlab on 03.04.17.
  */
-public class Current {
-    int duration;
-    private static Current ourInstance = new Current();
+public class YVoltage {
 
-    public static Current getInstance() {
+    int duration;
+    private static YVoltage ourInstance = new YVoltage();
+
+    public static YVoltage getInstance() {
         return ourInstance;
     }
 
-    private Current() {
+    private YVoltage() {
         this.duration = 35;
     }
 
@@ -24,304 +25,307 @@ public class Current {
 
         switch (percentage) {
             case 0:
-                duration = 2;
+                duration = 36;
                 break;
             case 1:
-                duration = 27;
+                duration = 42;
                 break;
             case 2:
-                duration = 37;
+                duration = 45;
                 break;
             case 3:
-                duration = 43;
+                duration = 48;
                 break;
             case 4:
-                duration = 47;
+                duration = 52;
                 break;
             case 5:
-                duration = 51;
+                duration = 55;
                 break;
             case 6:
-                duration = 53;
+                duration = 57;
                 break;
             case 7:
-                duration = 56;
-                break;
-            case 8:
                 duration = 60;
                 break;
-            case 9:
+            case 8:
                 duration = 63;
                 break;
+            case 9:
+                duration = 65;
+                break;
             case 10:
-                duration = 67;
+                duration = 69;
                 break;
             case 11:
-                duration = 71;
+                duration = 73;
                 break;
             case 12:
                 duration = 75;
                 break;
             case 13:
-                duration = 77;
+                duration = 79;
                 break;
             case 14:
-                duration = 82;
+                duration = 83;
                 break;
             case 15:
-                duration = 86;
+                duration = 87;
                 break;
             case 16:
-                duration = 89;
+                duration = 90;
                 break;
             case 17:
-                duration = 93;
+                duration = 96;
                 break;
             case 18:
-                duration = 99;
+                duration = 104;
                 break;
             case 19:
-                duration = 105;
+                duration = 109;
                 break;
             case 20:
-                duration = 111;
+                duration = 114;
                 break;
             case 21:
-                duration = 117;
+                duration = 120;
                 break;
             case 22:
                 duration = 125;
                 break;
             case 23:
-                duration = 130;
+                duration = 131;
                 break;
             case 24:
-                duration = 139;
+                duration = 138;
                 break;
             case 25:
-                duration = 145;
+                duration = 143;
                 break;
             case 26:
-                duration = 150;
+                duration = 149;
                 break;
             case 27:
-                duration = 157;
+                duration = 155;
                 break;
             case 28:
-                duration = 164;
+                duration = 160;
                 break;
             case 29:
-                duration = 170;
+                duration = 166;
                 break;
             case 30:
-                duration = 180;
+                duration = 174;
                 break;
             case 31:
-                duration = 184;
+                duration = 180;
                 break;
             case 32:
-                duration = 190;
+                duration = 185;
                 break;
             case 33:
-                duration = 195;
+                duration = 191;
                 break;
             case 34:
-                duration = 202;
+                duration = 197;
                 break;
             case 35:
-                duration = 209;
+                duration = 205;
                 break;
             case 36:
-                duration = 215;
+                duration = 210;
                 break;
             case 37:
-                duration = 221;
+                duration = 217;
                 break;
             case 38:
-                duration = 229;
+                duration = 223;
                 break;
             case 39:
-                duration = 235;
+                duration = 230;
                 break;
             case 40:
-                duration = 241;
+                duration = 235;
                 break;
             case 41:
-                duration = 249;
+                duration = 241;
                 break;
             case 42:
-                duration = 255;
+                duration = 246;
                 break;
             case 43:
-                duration = 261;
+                duration = 253;
                 break;
             case 44:
-                duration = 270;
+                duration = 256;
                 break;
             case 45:
-                duration = 275;
+                duration = 264;
                 break;
             case 46:
-                duration = 280;
+                duration = 270;
                 break;
             case 47:
-                duration = 286;
+                duration = 276;
                 break;
             case 48:
-                duration = 295;
+                duration = 282;
                 break;
             case 49:
-                duration = 301;
+                duration = 287;
                 break;
             case 50:
-                duration = 310;
+                duration = 293;
                 break;
             case 51:
-                duration = 315;
+                duration = 299;
                 break;
             case 52:
-                duration = 320;
+                duration = 305;
                 break;
             case 53:
-                duration = 327;
+                duration = 312;
                 break;
             case 54:
-                duration = 335;
+                duration = 318;
                 break;
             case 55:
-                duration = 340;
+                duration = 325;
                 break;
             case 56:
-                duration = 345;
+                duration = 331;
                 break;
             case 57:
-                duration = 353;
+                duration = 337;
                 break;
             case 58:
-                duration = 360;
+                duration = 344;
                 break;
             case 59:
-                duration = 365;
+                duration = 349;
                 break;
             case 60:
-                duration = 371;
+                duration = 356;
                 break;
             case 61:
-                duration = 379;
+                duration = 361;
                 break;
             case 62:
-                duration = 385;
+                duration = 362;
                 break;
             case 63:
-                duration = 395;
+                duration = 375;
                 break;
             case 64:
-                duration = 405;
+                duration = 377;
                 break;
             case 65:
-                duration = 410;
+                duration = 382;
                 break;
             case 66:
-                duration = 417;
+                duration = 392;
                 break;
             case 67:
-                duration = 423;
+                duration = 396;
                 break;
             case 68:
-                duration = 433;
+                duration = 402;
                 break;
             case 69:
-                duration = 437;
+                duration = 409;
                 break;
             case 70:
-                duration = 445;
+                duration = 415;
                 break;
             case 71:
-                duration = 454;
+                duration = 422;
                 break;
             case 72:
-                duration = 456;
+                duration = 427;
                 break;
             case 73:
-                duration = 460;
+                duration = 435;
                 break;
             case 74:
-                duration = 466;
+                duration = 440;
                 break;
             case 75:
-                duration = 474;
+                duration = 447;
                 break;
             case 76:
-                duration = 483;
+                duration = 456;
                 break;
             case 77:
-                duration = 488;
+                duration = 459;
                 break;
             case 78:
-                duration = 500;
+                duration = 468;
                 break;
             case 79:
-                duration = 507;
+                duration = 474;
                 break;
             case 80:
-                duration = 511;
+                duration = 478;
                 break;
             case 81:
-                duration = 515;
+                duration = 484;
                 break;
             case 82:
-                duration = 520;
+                duration = 489;
                 break;
             case 83:
-                duration = 527;
+                duration = 497;
                 break;
             case 84:
-                duration = 535;
+                duration = 504;
                 break;
             case 85:
-                duration = 540;
+                duration = 508;
                 break;
             case 86:
-                duration = 550;
+                duration = 514;
                 break;
             case 87:
-                duration = 555;
+                duration = 518;
                 break;
             case 88:
-                duration = 563;
+                duration = 527;
                 break;
             case 89:
-                duration = 570;
+                duration = 533;
                 break;
             case 90:
-                duration = 575;
+                duration = 539;
+                break;
+            case 91:
+                duration = 547;
                 break;
             case 92:
-                duration = 590;
+                duration = 552;
                 break;
             case 93:
-                duration = 595;
+                duration = 557;
                 break;
             case 94:
-                duration = 602;
+                duration = 564;
                 break;
             case 95:
-                duration = 610;
+                duration = 579;
                 break;
             case 96:
-                duration = 615;
+                duration = 576;
                 break;
             case 97:
-                duration = 623;
+                duration = 582;
                 break;
             case 98:
-                duration = 627;
+                duration = 590;
                 break;
             case 99:
-                duration = 634;
+                duration = 595;
                 break;
             case 100:
-                duration = 640;
+                duration = 600;
                 break;
 
 
