@@ -25,22 +25,22 @@ public class XVoltage {
 
         switch (percentage) {
             case 0:
-                duration = 36;
+                duration = 38;
                 break;
             case 1:
                 duration = 42;
                 break;
             case 2:
-                duration = 45;
+                duration = 46;
                 break;
             case 3:
-                duration = 48;
+                duration = 49;
                 break;
             case 4:
                 duration = 52;
                 break;
             case 5:
-                duration = 55;
+                duration = 54;
                 break;
             case 6:
                 duration = 57;
@@ -52,19 +52,19 @@ public class XVoltage {
                 duration = 63;
                 break;
             case 9:
-                duration = 65;
+                duration = 66;
                 break;
             case 10:
-                duration = 69;
+                duration = 70;
                 break;
             case 11:
                 duration = 73;
                 break;
             case 12:
-                duration = 75;
+                duration = 76;
                 break;
             case 13:
-                duration = 79;
+                duration = 80;
                 break;
             case 14:
                 duration = 83;
@@ -73,40 +73,40 @@ public class XVoltage {
                 duration = 87;
                 break;
             case 16:
-                duration = 90;
+                duration = 91;
                 break;
             case 17:
-                duration = 96;
+                duration = 98;
                 break;
             case 18:
-                duration = 104;
+                duration = 103;
                 break;
             case 19:
                 duration = 109;
                 break;
             case 20:
-                duration = 114;
+                duration = 115;
                 break;
             case 21:
-                duration = 120;
+                duration = 119;
                 break;
             case 22:
-                duration = 125;
+                duration = 126;
                 break;
             case 23:
                 duration = 131;
                 break;
             case 24:
-                duration = 138;
+                duration = 137;
                 break;
             case 25:
-                duration = 143;
+                duration = 144;
                 break;
             case 26:
                 duration = 149;
                 break;
             case 27:
-                duration = 155;
+                duration = 154;
                 break;
             case 28:
                 duration = 160;
@@ -115,10 +115,10 @@ public class XVoltage {
                 duration = 166;
                 break;
             case 30:
-                duration = 174;
+                duration = 172;
                 break;
             case 31:
-                duration = 180;
+                duration = 179;
                 break;
             case 32:
                 duration = 185;
@@ -130,10 +130,10 @@ public class XVoltage {
                 duration = 197;
                 break;
             case 35:
-                duration = 205;
+                duration = 204;
                 break;
             case 36:
-                duration = 210;
+                duration = 211;
                 break;
             case 37:
                 duration = 217;
@@ -145,22 +145,22 @@ public class XVoltage {
                 duration = 230;
                 break;
             case 40:
-                duration = 235;
+                duration = 236;
                 break;
             case 41:
-                duration = 241;
+                duration = 242;
                 break;
             case 42:
-                duration = 246;
+                duration = 247;
                 break;
             case 43:
                 duration = 253;
                 break;
             case 44:
-                duration = 256;
+                duration = 259;
                 break;
             case 45:
-                duration = 264;
+                duration = 265;
                 break;
             case 46:
                 duration = 270;
@@ -172,16 +172,16 @@ public class XVoltage {
                 duration = 282;
                 break;
             case 49:
-                duration = 287;
+                duration = 288;
                 break;
             case 50:
-                duration = 293;
+                duration = 294;
                 break;
             case 51:
                 duration = 299;
                 break;
             case 52:
-                duration = 305;
+                duration = 306;
                 break;
             case 53:
                 duration = 312;
@@ -193,7 +193,7 @@ public class XVoltage {
                 duration = 325;
                 break;
             case 56:
-                duration = 331;
+                duration = 332;
                 break;
             case 57:
                 duration = 337;
@@ -208,25 +208,25 @@ public class XVoltage {
                 duration = 356;
                 break;
             case 61:
-                duration = 361;
-                break;
-            case 62:
                 duration = 362;
                 break;
+            case 62:
+                duration = 368;
+                break;
             case 63:
-                duration = 375;
+                duration = 373;
                 break;
             case 64:
-                duration = 377;
+                duration = 379;
                 break;
             case 65:
-                duration = 382;
+                duration = 385;
                 break;
             case 66:
-                duration = 392;
+                duration = 391;
                 break;
             case 67:
-                duration = 396;
+                duration = 397;
                 break;
             case 68:
                 duration = 402;
@@ -235,97 +235,97 @@ public class XVoltage {
                 duration = 409;
                 break;
             case 70:
-                duration = 415;
+                duration = 416;
                 break;
             case 71:
-                duration = 422;
+                duration = 421;
                 break;
             case 72:
-                duration = 427;
+                duration = 428;
                 break;
             case 73:
-                duration = 435;
+                duration = 434;
                 break;
             case 74:
-                duration = 440;
+                duration = 441;
                 break;
             case 75:
                 duration = 447;
                 break;
             case 76:
-                duration = 456;
+                duration = 454;
                 break;
             case 77:
-                duration = 459;
+                duration = 460;
                 break;
             case 78:
-                duration = 468;
+                duration = 467;
                 break;
             case 79:
-                duration = 474;
+                duration = 473;
                 break;
             case 80:
-                duration = 478;
+                duration = 480;
                 break;
             case 81:
-                duration = 484;
+                duration = 485;
                 break;
             case 82:
-                duration = 489;
+                duration = 491;
                 break;
             case 83:
                 duration = 497;
                 break;
             case 84:
-                duration = 504;
+                duration = 503;
                 break;
             case 85:
-                duration = 508;
+                duration = 509;
                 break;
             case 86:
-                duration = 514;
+                duration = 515;
                 break;
             case 87:
-                duration = 518;
+                duration = 520;
                 break;
             case 88:
                 duration = 527;
                 break;
             case 89:
-                duration = 533;
+                duration = 532;
                 break;
             case 90:
-                duration = 539;
+                duration = 538;
                 break;
             case 91:
-                duration = 547;
+                duration = 545;
                 break;
             case 92:
-                duration = 552;
+                duration = 551;
                 break;
             case 93:
                 duration = 557;
                 break;
             case 94:
-                duration = 564;
+                duration = 563;
                 break;
             case 95:
-                duration = 579;
+                duration = 569;
                 break;
             case 96:
                 duration = 576;
                 break;
             case 97:
-                duration = 582;
+                duration = 581;
                 break;
             case 98:
-                duration = 590;
+                duration = 588;
                 break;
             case 99:
-                duration = 595;
+                duration = 594;
                 break;
             case 100:
-                duration = 600;
+                duration = 602;
                 break;
 
 

@@ -1,6 +1,5 @@
 package ExtensionBoard;
 
-import Messumformer.HSNAusgang;
 import Messumformer.Values.X.XCurrent;
 import Messumformer.Values.X.XVoltage;
 import Messumformer.Values.Y.YCurrent;
@@ -94,7 +93,7 @@ public class PCA9683Manager implements HSNPCA9685 {
             case X:
                 System.out.println("Setting PWM Value X");
                 setPwm(PCA9685Pin.PWM_00,xVoltage.getDuration(percentage));
-                setPwm(PCA9685Pin.PWM_01,xCurrent.getDuration(percentage));
+                setPwm(PCA9685Pin.PWM_01,xCurrent.getDuration(percentage,false));
                 break;
 
             case Y:

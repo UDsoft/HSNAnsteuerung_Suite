@@ -12,6 +12,7 @@ public class HSNStandardData {
 
     private String werte;
     private String group;
+    private Boolean isOffsetzero;
     /**
      * Empty Constructor
      */
@@ -20,9 +21,10 @@ public class HSNStandardData {
     }
 
     //Constructor with the value and group name
-    public HSNStandardData(String werte, String group) {
+    public HSNStandardData(String werte, String group,Boolean isOffsetzero) {
         this.werte = werte;
         this.group = group;
+        this.isOffsetzero = isOffsetzero;
     }
 
 
@@ -32,6 +34,10 @@ public class HSNStandardData {
 
     public void setWerte(String werte) {
         this.werte = werte;
+    }
+
+    public void setIsOffsetzero(boolean isOffsetzero){
+        this.isOffsetzero = isOffsetzero;
     }
 
     public PinGroup getGroup() {
