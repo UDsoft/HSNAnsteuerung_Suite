@@ -92,7 +92,7 @@ public class PCA9683Manager implements HSNPCA9685 {
         switch (pinGroup){
             case X:
                 System.out.println("Setting PWM Value X");
-                setPwm(PCA9685Pin.PWM_00,xVoltage.getDuration(percentage));
+                setPwm(PCA9685Pin.PWM_00,xVoltage.getDuration(percentage)+3);
                 setPwm(PCA9685Pin.PWM_01,xCurrent.getDuration(percentage,false));
                 break;
 
@@ -103,7 +103,7 @@ public class PCA9683Manager implements HSNPCA9685 {
                 break;
             case Z:
                 System.out.println("Setting PWM Value Z");
-                setPwm(PCA9685Pin.PWM_04,zVoltage.getDuration(percentage));
+                setPwm(PCA9685Pin.PWM_04,zVoltage.getDuration(percentage)+9);
                 setPwm(PCA9685Pin.PWM_05,zCurrent.getDuration(percentage));
                 break;
             default:

@@ -25,7 +25,7 @@ public class YVoltage {
 
         switch (percentage) {
             case 0:
-                duration = 385;
+                duration = 10;
                 break;
             case 1:
                 duration = 42;

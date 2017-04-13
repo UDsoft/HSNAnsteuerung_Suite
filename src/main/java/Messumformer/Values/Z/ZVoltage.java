@@ -25,7 +25,7 @@ public class ZVoltage {
 
         switch (percentage) {
             case 0:
-                duration = 36;
+                duration = 20;
                 break;
             case 1:
                 duration = 42;

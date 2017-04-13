@@ -25,13 +25,13 @@ public class XVoltage {
 
         switch (percentage) {
             case 0:
-                duration = 38;
+                duration = 10;
                 break;
             case 1:
-                duration = 42;
+                duration = 40;
                 break;
             case 2:
-                duration = 46;
+                duration = 44;
                 break;
             case 3:
                 duration = 49;
@@ -325,7 +325,7 @@ public class XVoltage {
                 duration = 594;
                 break;
             case 100:
-                duration = 602;
+                duration = 620;
                 break;
 
 
